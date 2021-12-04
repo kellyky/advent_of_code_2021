@@ -14,14 +14,22 @@ I'll probably stick to Javascript for the exercises. But we'll see!
 ## How to Use Day-Creator
 As of 12/4 :-)
 
+### Setup
 1. Copy/download/clone the file to the root of your directory
 2. `chmod +x day-creator.sh` so you can run it
 
-Currently, you have to edit the file daily to update the day -- e.g. `day_2 to day_3`.
+### Running It
+1. Edit the file to the current day (and beyond if you want more interesting file names)
+1. From the root of your directory, run `./ day-creator.sh`
+Viola! Hopefully you have a folder for the new day, with a file for part 1 and part 2. Inside those files, will exist the code you need to turn the input file into an arrayyou can use in your code for that day. 
 
-I do hope and plan to automate this a bit, and I have a couple ideas in mind:
-* Set it to prompt user input, and write that into the day number (if that's feasible)
-* Or,  possibly write the day-renaming into the file (if possible) and connect it to my chrontab to run daily
+It'll be a `const` called `input` so rename that if you'd like. 
+
+### Gotchas
+You definitley have to edit the daily directory name and file name before running `./day-creator.sh`. E.g., `day_2` to `day_3`.
+
+For now. I have ideas to automate that (either make it take user input or something different), and I may move towards a framework of some sort in the future. I may also try to figure out how to set up some unit tests.  For now, it's all shell fun.  
+
 
 
 
