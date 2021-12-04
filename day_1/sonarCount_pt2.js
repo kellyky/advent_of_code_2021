@@ -23,12 +23,7 @@ const sonarIncreaseCount = (input) => {
       let sumA = input[i] + input[i + 1] + input[i + 2];
       let sumB = input[i + 1] + input[i + 2] + input[i + 3];
 
-      if (sumB > sumA) {
-        counter++;
-        console.log('sumB wins!');
-      } else {
-        console.log('no points awarded');
-      }
+      sumB > sumA ? counter++ : counter += 0;
       window++;
     }
   }
