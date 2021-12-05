@@ -1,18 +1,14 @@
 // Code I can use to 'import' the daily input file
 
-// const fs = require("fs");
+const fs = require("fs");
 
-// const input = fs
-//   .readFileSync("input.txt", { encoding: "utf-8" })
-//   .split("\n")
-//   .filter((x) => Boolean(x))
-//   .map((x) => parseInt(x));
+const input = fs
+  .readFileSync("input.txt", { encoding: "utf-8" })
+  .split("\n")
+  .filter((x) => Boolean(x))
 
 
 // Day 2, Part 1 https://adventofcode.com/2021/day/2
-
-// temp
-const input = ['forward 5', 'down 5', 'forward 8', 'up 3', 'down 8', 'forward 2'];
 
 function dive (input) {
   let depth = 0;
@@ -34,4 +30,4 @@ function dive (input) {
   return depth * horizontal;
 }
 
-console.log(dive(input));
+console.log(dive);
