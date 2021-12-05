@@ -12,9 +12,7 @@ const sonarIncreaseCount = (input) => {
   let counter = 0;
 
   for (let i = 0; i < input.length; i++) {
-    if (input[i] < input[i + 1]){
-      counter++;
-    }
+    input[i] < input[i + 1] ? counter ++ : counter += 0;
   }
   
   return counter;

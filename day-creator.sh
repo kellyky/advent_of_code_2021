@@ -15,6 +15,9 @@ mv day${DAY}-part1.js day${DAY}
 # Copy the file & rename to a part2
 cp day${DAY}/day${DAY}-part1.js day${DAY}/day${DAY}-part2.js
 
+# Create empty input file in new dir
+touch day${DAY}/input.txt
+
 
 
 
