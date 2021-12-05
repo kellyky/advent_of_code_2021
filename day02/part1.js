@@ -18,16 +18,13 @@ function dive (input) {
     let entry = input[j];
     let newEntry = entry.split(' ', input[j].length);
     let num = parseInt(newEntry[1]);
-    if (newEntry[0] == 'forward') {
-      horizontal += num;
-    } else if (newEntry[0] == 'down') {
-      depth += num;
-    } else {
-      depth -= num;
-    }
-  }
 
+    newEntry[0] == 'forward' ? horizontal += num
+    : newEntry[0] == 'down' ? depth += num
+    : depth -= num;
+
+  }
   return depth * horizontal;
 }
 
-console.log(dive);
+console.log(dive(input));
