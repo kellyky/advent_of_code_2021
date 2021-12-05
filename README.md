@@ -1,34 +1,44 @@
 Advent of Code 2021!! 
 
-README is 100% still in progress, as I'm figuring it out as I go. But, here's where I am as of 12/4. 
-
-* I've attempted Day 1 Part 1
-* I've created a skeleton file that contains code that allows me to turn input file into an array each day
-* day-creator.sh is a rough start at something to automate the skeleton folder/files for each day
+README is 100% still in progress, as I'm figuring it out as I go. But, here's where I am as of 12/5. 
 
 ## Advent of Code
-Following along with Advent of Code exercises. https://adventofcode.com/2021
+Following along with Advent of Code exercises. https://adventofcode.com/2021. I'm here to learn and practice so I'll keep a file for each day's part. 
 
-I'll probably stick to Javascript for the exercises. But we'll see!
+* Day 1: [Part 1](https://github.com/kellyky/advent_of_code_2021/blob/main/day_1/sonarCount_pt1.js) | [Part 2](https://github.com/kellyky/advent_of_code_2021/blob/main/day_1/sonarCount_pt2.js)
+* Day 2: [Part 1](https://github.com/kellyky/advent_of_code_2021/blob/main/day02/part1.js) | Part 2
 
-## How to Use Day-Creator
-As of 12/4 :-)
+I'll probably stick to Javascript for the exercises. I may or may not continue to update the readme with day/day-part links. We'll see!
+
+## Day-Creator
+If you're interested in _one command to rule them all!!_ or... maybe one command to create that day's folder and skeleton files, you're in the right place. 
+
+What it does:
+  * Create a directory for that day's files - e.g. `day05`
+  * Create empty/placeholder `input.txt` in that directory
+  * Create part1.js and part2.js in that directory. 
+      * These will have code from `skeleton-imports.js` -- some starter code to help with imports (see gotchas)   
 
 ### Setup
 1. Copy/download/clone the file to the root of your directory
-2. `chmod +x day-creator.sh` so you can run it
+2. You also need to copy/clone `skeleton-imports.js` into that same directory
+3. `chmod +x day-creator.sh` each of those files 
 
-### Running It
-1. Edit the file to the current day (and beyond if you want more interesting file names)
-1. From the root of your directory, run `./ day-creator.sh`
-Viola! Hopefully you have a folder for the new day, with a file for part 1 and part 2. Inside those files, will exist the code you need to turn the input file into an arrayyou can use in your code for that day. 
+### How to Use 
+Run `./day-creator.sh` from the root of your advent of code directory. That's it ;-P
 
-It'll be a `const` called `input` so rename that if you'd like. 
+### Gotchas & Notes
+Note that directories are named for the date -- i.e. the day of the month they are created on. 
 
-### Gotchas
-You definitley have to edit the daily directory name and file name before running `./day-creator.sh`. E.g., `day_2` to `day_3`.
+  * If I run `./day-creator.sh` on Dec 10, my directory for that day is called `day10`
+  * If I run it on Feb 3, the directory would be called `day03`
+If you're going to use this script, you need to run it on the day of the month that correlates to the day of the challenge. Or, you can edit the file before you run it and have it name things how you'd like.
 
-For now. I have ideas to automate that (either make it take user input or something different), and I may move towards a framework of some sort in the future. I may also try to figure out how to set up some unit tests.  For now, it's all shell fun.  
+This is nice for organizing each day's work, it's terrible for tab-completion. It also doesn't make for very fun names for files. Takes a little whimsy out of it. 
+
+Otherwise, you may need to consider/change:
+  * The skeleton code in part1.js and part2.js _assumes numerical input_ -- change as needed, depending on the input
+  * The input is declared as a const `input` - accurate but boring 😆
 
 
 
