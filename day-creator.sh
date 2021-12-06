@@ -3,20 +3,20 @@
 # Variable for the day, e.g. '04'
 DAY="$(date "+%d")"
 
-# Create dir for following day #Later, can I find a way to fill in the day number as I go, rather than by changing the file?
-mkdir day${DAY}
+# Create dir for following day; If run on Dec 9, directory will be named `day09`
+mkdir ${DAY}day
 
-# Copy & Rename Skeleton File to that of the date
-cp skeleton-imports.js day${DAY}-part1.js
+# Copies & Renames Skeleton File 
+cp skeleton-imports.js part1.js
 
 # Move copy into newly created dir for that day
-mv day${DAY}-part1.js day${DAY}
+mv part1.js ${DAY}day
 
 # Copy the file & rename to a part2
-cp day${DAY}/day${DAY}-part1.js day${DAY}/day${DAY}-part2.js
+cp ${DAY}day/part1.js ${DAY}day/part2.js
 
 # Create empty input file in new dir
-touch day${DAY}/input.txt
+touch ${DAY}day/input.txt
 
 
 
