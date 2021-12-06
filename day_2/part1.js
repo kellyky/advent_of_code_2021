@@ -1,8 +1,8 @@
-// Code I can use to 'import' the daily instructions file
+// Code I can use to 'import' the daily directions file
 
 const fs = require("fs");
 
-const instructions = fs
+const directions = fs
   .readFileSync("input.txt", { encoding: "utf-8" })
   .split("\n")
   .filter((x) => Boolean(x))
@@ -10,13 +10,13 @@ const instructions = fs
 
 // Day 2, Part 1 https://adventofcode.com/2021/day/2
 
-function dive (instructions) {
+function diveToLocation (directions) {
   let depth = 0;
   let horizontal = 0;
 
-  for (let j = 0; j < instructions.length; j++) {
-    let steps = instructions[j];
-    let stepArr = steps.split(' ', instructions[j].length);
+  for (let entry in directions) {
+    let steps = directions[entry];
+    let stepArr = steps.split(' ', directions[entry].length);
     let distance = parseInt(stepArr[1]);
 
     stepArr[0] == 'forward' ? horizontal += distance
@@ -27,4 +27,4 @@ function dive (instructions) {
   return depth * horizontal;
 }
 
-console.log(dive(instructions));
+console.log(diveToLocation(directions));
