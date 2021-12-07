@@ -9,9 +9,9 @@ const directions = fs
 
 // Day 2, Part 2 https://adventofcode.com/2021/day/2#part
 function dive (directions) {
-let depth = 0;
-let horizontal = 0;
-let aim = 0;
+  let depth = 0;
+  let horizontal = 0;
+  let aim = 0;
 
 for (let entry in directions){
   const step = directions[entry];
@@ -24,7 +24,8 @@ for (let entry in directions){
   } else if (stepArr[0] == 'up') {
     aim -= number;
   } else { 
-    horizontal += number; depth = depth + aim * number;
+    horizontal += number; 
+    depth = depth + aim * number;
   }
 }
 return depth * horizontal;
