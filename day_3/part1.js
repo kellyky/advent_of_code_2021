@@ -10,40 +10,61 @@
 // Day 3: https://adventofcode.com/2021/day/3
 
 
-// sum of vertical index-slice of array (I suspect this boilerplate formulat needs some work)
+// sum of vertical index-column of array (I suspect this boilerplate formulat needs some work)
 const sum = (x, y) => x + y;
+
 
 // length calculates length of input - numbers or whatever I rename it to
 const length = (numbers) => numbers.length;
 
+
 // placeholder set, will need to change this out for the real input
 const numbers = ['00100', '11110', '10110'];
 
-const numArrI = (numbers, index) => {
-  let arr = [];
+const verticalSlice = (numbers, index) => {
+  let column = [];
   for (let i in numbers) {
     const entry = numbers[i];
-    arr.push(entry[index]);
+    column.push(entry[index]);
   }
-  return arr;
+
+  let gamma = 0;
+  let epsilon = 0;
+  const colSum = column.reduce(sum);
+
+  // const isOnes = colSum.filter(col => col == 1)V;
+  const onesArr = column.filter(x => x == 1);
+  const zeroesArr = column.filter(x => x == 0);
+
+
+  onesArr.length > zeroesArr ? gamma += 1 : gamma += 0;
+  onesArr.length > zeroesArr ? epsilon += 0 : epsilon += 1;
+
+    
+  console.log('gamma: ' + gamma + ' | epsilon: ' + epsilon);
+
+  
+  console.log('Ones: ' + onesArr);
+  
+
+
+  console.log('sum : ' + colSum);
+  //
+  // return column;
 }
 
 
-// function returns array of numbers[index]
-// let indicesI = (numbers, index) => {
-//   let numArrI = [];
-//   let gamma = 0;
-//   let epsilon = 0;
 
+
+// const gamma = vericalSlice => {
+//   // defining our starting points for gamma, eps, and we'll use powerArray to collect the goods
+//   let gammaRate = 0;
+//   let powerArray = [];
 // }
 
-// Once it's working, it'll calculate the gamma for the indicesI :-)
-const gammaAdder = indicesI => {
-  let gamma = 0;
-  sum < length / 2 ? gamma += 1 : gamma += 0;
-  return gamma;
-}
+const powerComsuption = (gamma, epsilon) => gamma * epsilon;
 
 // console.log(indicesI).reduce(add);
 console.log('length: ' + length(numbers));
-console.log('numArrI: ' + numArrI(numbers, 2));
+console.log('verticalSlice: ' + verticalSlice(numbers, 1));
+// console.log('gamma: ' + gamma(verticalSlice));
