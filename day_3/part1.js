@@ -18,28 +18,47 @@ const arraySum = array => array.reduce(sum);
 const powerSlice = (readings, index) => {
   // Obtain the vertical slice
   let column = [];
-  for (let i in readings) {
-    const entry = readings[i];
+
+  readings.map((entry, index)=> {
+  // for (let i in readings) {
+    // const entry = readings[index];
     column.push(entry[index]);
-  }
+  // }
+  });
 
   // Defining gamma and epsilon
   let gamma = [];
   let epsilon = [];
   readings.map(powerReading => { 
     const onesInPowerSlice = column.filter(x => x == 1);
-    onesInPowerSlice.length > (readings.length / 2) 
-      ? gamma.push(1)
-      : epsilon.push(0);
+    const zeroesInPowerSlice = column.filter(x => x == 0);
+
+    if (onesInPowerSlice.length > readings.length / 2) {
+      gamma.push('1');
+      epsilon.push('0');
+    } else {
+      gamma.push('0');
+      epsilon.push('1');
+    }
+  
+    
     // onesInPowerSlice.length > (readings.length / 2) 
-    //   ? gamma += 1
-    //   : epsilon += 1;
+    //   ? gamma.push(1)
+    //   : epsilon.push(0);
+    // zeroesInPowerSlice.length > (readings.length / 2) 
+    //   ? gamma.push(0)
+    //   : epsilon.push(1);
+    
   });
 
-  
+  // const gammaSum = gamma.reduce(sum);
+  // const epsilonSum = epsilon.reduce(sum);
 
+  gamma = gamma.reduce(sum);
+  const gammaParsed = parseInt(gamma);
   
-
+  epsilon = epsilon.reduce(sum);
+  epsilon = parseInt(epsilon);
 
   console.log(`\ngamma: ${gamma} | epsilon: ${epsilon} \n`);
   return gamma * epsilon;
