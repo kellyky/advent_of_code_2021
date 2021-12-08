@@ -10,19 +10,14 @@
 // Day 3: https://adventofcode.com/2021/day/3
 
 
-// sum of vertical index-column of array (I suspect this boilerplate formulat needs some work)
 const sum = (x, y) => x + y;
-
-
-// length calculates length of input - numbers or whatever I rename it to
 const length = (numbers) => numbers.length;
-
-
-// placeholder set, will need to change this out for the real input
 const numbers = ['00100', '11110', '10110'];
 
-const verticalSlice = (numbers, index) => {
+const powerSlice = (numbers, index) => {
   let column = [];
+  let gammaArr = [];
+  let epsilonArr = [];
   for (let i in numbers) {
     const entry = numbers[i];
     column.push(entry[index]);
@@ -36,35 +31,21 @@ const verticalSlice = (numbers, index) => {
   const onesArr = column.filter(x => x == 1);
   const zeroesArr = column.filter(x => x == 0);
 
+  onesArr.length > zeroesArr.length ? gamma += 1 : epsilon += 1;
 
-  onesArr.length > zeroesArr ? gamma += 1 : gamma += 0;
-  onesArr.length > zeroesArr ? epsilon += 0 : epsilon += 1;
+  gammaArr.push(gamma);
+  epsilonArr.push(epsilon);
 
     
+  // let's see what we're seeing... 
   console.log('gamma: ' + gamma + ' | epsilon: ' + epsilon);
-
-  
+  console.log('gammaArr: ' + gammaArr + ' | epsilonArr: ' + epsilonArr);
   console.log('Ones: ' + onesArr);
-  
-
-
   console.log('sum : ' + colSum);
-  //
-  // return column;
+
+  
 }
 
+const powerConsuption = (gamma, epsilon) => gamma * epsilon;
 
-
-
-// const gamma = vericalSlice => {
-//   // defining our starting points for gamma, eps, and we'll use powerArray to collect the goods
-//   let gammaRate = 0;
-//   let powerArray = [];
-// }
-
-const powerComsuption = (gamma, epsilon) => gamma * epsilon;
-
-// console.log(indicesI).reduce(add);
-console.log('length: ' + length(numbers));
-console.log('verticalSlice: ' + verticalSlice(numbers, 1));
-// console.log('gamma: ' + gamma(verticalSlice));
+console.log('powerSlice: ' + powerSlice(numbers, 3));
