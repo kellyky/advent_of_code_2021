@@ -11,52 +11,24 @@ const readings = fs
 const sum = (x, y) => x + y;
 const length = (readings) => readings.length;
 const arraySum = array => array.reduce(sum);
-// const readings = ['00100', '11110', '10110'];
+const indices = [0, 1, 2, 3, 4];
 
-const powerSlice = (readings, index) => {
+const columnGetter = (readings, ...index) => {
   let column = [];
-
   for (let i in readings) {
     const entry = readings[i];
     column.push(entry[index]);
   }
-  
-  console.log(column);
-
-  // Defining gamma and epsilon
-  let gamma = [];
-  let epsilon = [];
-  readings.map(powerReading => { 
-    const onesInPowerSlice = column.filter(x => x == 1);
-    const zeroesInPowerSlice = column.filter(x => x == 0);
-    
-    const gamma = (onesInPowerSlice => {
-      onesInPowerSlice.length > rereadings.length 
-      ? gamma.push(1)
-      : gamma.push(0);
-      return gamma;
-    })
-      
-    const epsilon = (onesInPowerSlice => {
-      onesInPowerSlice.length > zeroesInPowerSlice
-      ? epsilon.push(0)
-      : epsilon.push(1);
-      return epsilon;
-    })
-  })
-
-
-  // gamma = gamma.reduce(sum);
-  const gammaParsed = parseInt(gamma);
-  
-  // epsilon = epsilon.reduce(sum);
-  const epsilonParsed = parseInt(epsilon);
-
-  console.log(`\ngamma: ${gamma} | epsilon: ${epsilon} \n`);
-  return gammaParsed * epsilonParsed;
-
-
+  return column;
 }
 
-console.log('powerSlice: ' + powerSlice(readings, 0));
-// console.log('powerConsumption: ' + powerConsumption(powerSlice));
+const column0 = columnGetter(readings, 0);
+const column1 = columnGetter(readings, 1);
+const column2 = columnGetter(readings, 2);
+const column3 = columnGetter(readings, 3);
+const column4 = columnGetter(readings, 4);
+
+
+const allColumns = [columnGetter(readings, 0), columnGetter(readings, 1), columnGetter(readings, 2), columnGetter(readings, 3), columnGetter(readings, 4)]
+
+allColumns.forEach(col => console.log(col));
