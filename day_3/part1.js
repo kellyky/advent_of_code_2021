@@ -20,11 +20,8 @@ const powerSlice = (readings, index) => {
 const eachPowerSlice = [powerSlice(readings, 0), powerSlice(readings, 1), powerSlice(readings, 2), powerSlice(readings, 3), powerSlice(readings, 4)]
 // console.log(eachPowerSlice);
 
-const orchestra = eachPowerSlice
-  .forEach((eachPowerSlice => { 
-    // console.log(eachPowerSlice);
 
-    // Tallying up the ones in each column
+const readingTheOnes = eachPowerSlice.forEach((eachPowerSlice => { 
     let onesArr = [];
     const allTheOnes = eachPowerSlice.filter(x => x == 1);
 
@@ -36,8 +33,11 @@ const orchestra = eachPowerSlice
     const lengthOfOnesArr = onesArrMaker.reduce((sum, x) => {
       return sum + onesArr.length;
     })
-    
-    // Tallying the zeroes per column
+  return onesArr;
+  })
+)
+
+const readingTheZeros = eachPowerSlice.forEach((eachPowerSlice => {
     let zeroArr = [];
 
     const allTheZeros = eachPowerSlice.filter(y => y == 0);
@@ -50,22 +50,23 @@ const orchestra = eachPowerSlice
     const lengthOfZerosArr = zerosArrMaker.reduce((sum, y) => {
       return sum + zeroArr.length;
     })
+  return zeroArr;
+  })
+)
+      
+const powerReading = eachPowerSlice.map((eachPowerSlice, onesArr, zeroArr) => {
+  let gamma = [];
+  let epsilon = [];
 
-    let gamma, epsilon;
-
-      if (onesArr.length > zeroArr.length) {
-        gamma = 1;
-        epsilon = 0;
-        // gamma.push(1);
-        // epsilon.push(0);
-      } else {
-        gamma = 0;
-        epsilon = 1;
-        // gamma.push(0);
-        // epsilon.push(1);
-      }
+    if (onesArr.length > zeroArr.length) {
+      gamma.push(1);
+      epsilon.push(0);
+    } else {
+      gamma.push(0);
+      epsilon.push(1);
+    }
 
     console.log(gamma);
     console.log(epsilon);
-    
-  }))
+})
+
