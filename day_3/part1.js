@@ -22,73 +22,111 @@ const powerSlice = (readings, index) => {
 
 
 
-const allColumns = [powerSlice(readings, 0), powerSlice(readings, 1), powerSlice(readings, 2), powerSlice(readings, 3), powerSlice(readings, 4)]
-console.log(allColumns);
-
-const orchestra = allColumns
-  .map((violin => { 
-    const soloists = violin.filter(x => x == 1);
-    const audience = violin.filter(y => y == 0);
-    console.log(soloists.length+ ' ' + audience.length);
+const eachPowerSlice = [powerSlice(readings, 0), powerSlice(readings, 1), powerSlice(readings, 2), powerSlice(readings, 3), powerSlice(readings, 4)]
+console.log(eachPowerSlice);
 
 
+const orchestra = eachPowerSlice
+  .forEach((violin => { 
+    // console.log(violin);
 
-    let onesCount = violin.reduce(function (count, cello) {
-      cello in count ? count[cello]++ : count[cello] = 1;
-      console.log(count);
-      return count
-    }, {})
+    let onesArr = [];
+    let allTheOnes = violin
+      .filter(x => x == 1)
+      .map((x) => {
+        onesArr.push(1);
+        return onesArr;
+      }).reduce((sum, x) => {
+        return sum + onesArr.length;
+      })
+    console.log(allTheOnes);
 
-  }))
+    let zeroArr = [];
+    let allZeros = violin
+      .filter(y => y == 0)
+      .map((y) => {
+      zeroArr.push(0);
+      return zeroArr;
+    }).reduce((sum, y) => {
+      return sum + zeroArr.length;
+    })
+    console.log(allZeros);
+
+    let gamma = [];
+    let epsilon = [];
+
+    if (onesArr.length > zeroArr.length) {
+      gamma.push(1);
+      epsilon.push(0);
+      // console.log("gammmmmmaaa " + gamma);
+    } else {
+      gamma.push(0);
+      epsilon.push(1);
+      // console.log("oooooo 0 EPSILON" + epsilon);
+    }
+
+    console.log(gamma);
+    console.log(epsilon);
 
 
 
 
-
-
-  // let gamma = placeholder => {
-  // const onesInPowerSlice = violin.filter(x => x == 1);
-  // onesInPowerSlice.length > readings.length
-  //   ? gamma += 1
-  //   : gamma += 0;
     
-  //   return gamma;
 
-  // }
-
-
-  // let epsilon = [];
-  // const zeroesInPowerSlice = violin.filter(x => x == 0);
-  // zeroesInPowerSlice.length > readings.length
-  //   ? epsilon.push(0)
-  //   : epsilon.push(1);
-
-  // console.log(violin)}
-  // ))
-
-    
-
-// console.log(allColumns);
+//     const allTheZeros = violin.filter(y => y == 0);
+//     console.log(`${allTheOnes} | ${allTheZeros}`);
 
 
-// const readOnes = allColumns.forEach(col => {
-//   col.filter(x => x == 1);
-// })
-// const powerReader = allColumns.forEach(col => {
-//   const onesInSlice = col.filter(x => x == 1);
-// })
+//     let gamma = 0;
+//     let epsilon = 0;
 
-// const gamma = (onesInPowerSlice => {
-//       onesInPowerSlice.length > rereadings.length
-//       ? gamma.push(1)
-//       : gamma.push(0);
-//       return gamma;
-//     })
+//     const gammaReading = violin => {
+//       allTheOnes > allTheZeros 
+//       ? gamma += 1 
+//       : epsilon += 1;
+//       return gamma; 
+//     }
+//     console.log(gamma);
 
-//     const epsilon = (onesInPowerSlice => {
-//       onesInPowerSlice.length > zeroesInPowerSlice
-//       ? epsilon.push(0)
-//       : epsilon.push(1);
+//     const powerReading = violin => {
+//       allTheOnes > allTheZeros 
+//       ? gamma += 1 
+//       : epsilon += 1;
 //       return epsilon;
-//     })
+//     }
+//     console.log(gamma);
 
+
+    
+
+//     let onesCount = allTheOnes.reduce(function (ones, el) {
+//       el in ones ? ones[el]++ : ones[el] = 1;
+//       console.log(ones);
+//       return ones
+//     }, {})
+
+//     let zeroCount = allTheZeros.reduce(function (zeros, el) {
+//       el in zeros ? zeros[el]++ : zeros[el] = 0;
+//       console.log(zeros);
+//       return zeros
+//     }, {})
+
+    // let gamma = 0;
+//     let powerReading = violin.map 
+//     onesCount > zeroCount ? gamma = 1 : epsilon = 1;
+
+
+    // let gamma = [];
+    // const powerReadingGamma = (allTheOnes, allTheZeros) => {
+    //   allTheOnes > allTheZeros ? gamma.push('1') : gamma.push('0');
+    //   // return powerReadingGamma;
+    // }
+
+    // let epsilon = 0;
+    // const powerReadingEpsilon = (allTheOnes, allTheZeros) => {
+    //   allTheOnes < allTheZeros ? epsilon += 1 : epsilon = 0;
+    // }
+
+    // console.log(gamma);
+    
+  }))
