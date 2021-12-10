@@ -14,15 +14,9 @@ const arraySum = array => array.reduce(sum);
 const halfReadingLength = readings.length / 2;
 
 
-// Taken from part1.js
-// This file removes the top portion of code and just feeds in the output of the verrtical slices of readings
-// I need to use this array to 
-  // measure the 1s (and/or 0z)
-// From there I need to compare the sum or count of 1s against halfReadingLength
-  // and use that to determine gamma and epsilon 
-// from there, I need to 
 
-
+// This const is the hardcoded result of what my code would output at this point 
+// I'm hoping that narrowing the file for now will help me hone in on and solve the issue that is giving me difficulty
 const theArrayINeedToMeasureGammaFor = [
   [
     '0', '1', '1', '1',
@@ -71,33 +65,26 @@ const thisManyOnesPerBit = theArrayINeedToMeasureGammaFor.forEach((theArrayINeed
   })
 
 
+// I need to figure out how to use this ones count -- 
 
 
-// const rawPowerReading = theArrayINeedTioMeasureGammaFor).map( onesArr => {
-//   let gamma = [];
-//   let epsilon = [];
+const rawPowerReading = theArrayINeedToMeasureGammaFor.map( lengthOfOnesArr => {
+  let gamma = [];
+  let epsilon = [];
 
-//   let gammaReader = theArrayINeedTioMeasureGammaFor).map((onesArr) => {
-//     onesArr.length > halfReadingLength ? gamma.push('1') : gamma.push('0');
-//     return gamma;
-//   })
+  let gammaReader = theArrayINeedToMeasureGammaFor.map((lengthOfOnesArr) => {
+    lengthOfOnesArr.length > halfReadingLength ? gamma.push('1') : gamma.push('0');
+    return gamma;
+  })
 
-//   let epsilonReader = theArrayINeedTioMeasureGammaFor).map((onesArr) => { 
-//     onesArr.length < halfReadingLength ? epsilon.push('1') : epsilon.push('0');
-//     return epsilon;
-//   })
+  let epsilonReader = theArrayINeedToMeasureGammaFor.map((lengthOfOnesArr) => { 
+    lengthOfOnesArr.length < halfReadingLength ? epsilon.push('1') : epsilon.push('0');
+    return epsilon;
+  })
 
-//   console.log(epsilon);
-  
-// })
+  console.log(epsilon);
+})
 
-// // const rawPowerReading = theArrayINeedTioMeasureGammaFor).map( onesArr => {
-// // const powerReading = (theArrayINeedTioMeasureGammaFor), onesArr) => {
-// //   let gamma = [];
-// //   let epsilon = [];
+// ^ currently logs a 5 x 5 array of '0' 
 
 
-
-// // }
-
-// // console.log(powerReading(theArrayINeedTioMeasureGammaFor)[0]));
