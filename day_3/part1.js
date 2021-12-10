@@ -1,12 +1,11 @@
 const fs = require("fs");
 
 const readings = fs
-  .readFileSync("sampleInput.txt", { encoding: "utf-8" })
+  .readFileSync("input.txt", { encoding: "utf-8" })
   .split("\n")
   .filter((x) => x)
 
 // Day 3: https://adventofcode.com/2021/day/3
-
 
 const sum = (x, y) => x + y;
 const length = (readings) => readings.length;
@@ -14,7 +13,7 @@ const arraySum = array => array.reduce(sum);
 const halfReadingLength = readings.length / 2;
 
 
-const readingBitSlicer = (readings, index) => {
+const bitColumnSlicer = (readings, index) => {
   let column = [];
   for (let i in readings) {
     const entry = readings[i];
@@ -23,53 +22,47 @@ const readingBitSlicer = (readings, index) => {
   return column;
 }
 
-
-const bitIndexReadings = [readingBitSlicer(readings, 0), readingBitSlicer(readings, 1), readingBitSlicer(readings, 2), readingBitSlicer(readings, 3), readingBitSlicer(readings, 4)]
-console.log(bitIndexReadings);
-
-
-const thisManyOnesPerBit = bitIndexReadings.forEach((bitIndexReadings => { 
-    let onesArr = [];
-    const allTheOnes = bitIndexReadings.filter(x => x == 1);
-
-    const onesArrMaker = allTheOnes.map(x => {
-      onesArr.push(1);
-      return onesArr;
-    })
-      
-    const lengthOfOnesArr = onesArrMaker.reduce((sum, x) => {
-      return sum + onesArr.length;
-    })
-  return onesArr;
-  }))
-
-
-const rawPowerReading = bitIndexReadings.map( onesArr => {
-  let gamma = [];
-  let epsilon = [];
-
-  let gammaReader = bitIndexReadings.map((onesArr) => {
-    onesArr.length > halfReadingLength ? gamma.push('1') : gamma.push('0');
-    return gamma;
-  })
-
-  let epsilonReader = bitIndexReadings.map((onesArr) => { 
-    onesArr.length < halfReadingLength ? epsilon.push('1') : epsilon.push('0');
-    return epsilon;
-  })
-
-  console.log(gamma);
-  console.log(epsilon);
+// const bitIndexReadings = bitColumnSlicer.map( index => {
+//   return index;
   
+// })
+
+const bitIndexReadings = [bitColumnSlicer(readings, 0), bitColumnSlicer(readings, 1), bitColumnSlicer(readings, 2), bitColumnSlicer(readings, 3), bitColumnSlicer(readings, 4),bitColumnSlicer(readings, 5),bitColumnSlicer(readings, 6),bitColumnSlicer(readings, 7),bitColumnSlicer(readings, 8),bitColumnSlicer(readings, 9),bitColumnSlicer(readings, 10),bitColumnSlicer(readings, 11)]
+
+// const bitIndexReadings = [ bitColumnSlicer(readings, 0), bitColumnSlicer(readings, 1), bitColumnSlicer(readings, 2), bitColumnSlicer(readings, 3), bitColumnSlicer(readings, 4) bitColumnSlicer(readings, 5), bitColumnSlicer(readings, 6), bitColumnSlicer(readings, 7), bitColumnSlicer(readings, 8), bitColumnSlicer(readings, 9), bitColumnSlicer(readings, 10), bitColumnSlicer(readings, 11), 
+// ]
+
+
+const thisManyOnesPerBit = bitIndexReadings.map((column => { 
+  return column.filter(x => x == 1);
+}))
+
+const gamma = thisManyOnesPerBit.map( countedOnes => {
+  return countedOnes.length > halfReadingLength ? '1' : '0';
 })
+console.log(gamma);
 
-// const rawPowerReading = bitIndexReadings.map( onesArr => {
-// const powerReading = (bitIndexReadings, onesArr) => {
-//   let gamma = [];
-//   let epsilon = [];
+const gammaToDecimal = gamma => {
+  const gammaToInt = gamma.join('');
+  return parseInt(gammaToInt, 2);
+}
 
+console.log(gammaToDecimal(gamma));
 
+const epsilon = gamma.map( element => {
+  return element == '1' ? '0' : '1';
+})
+console.log(epsilon);
 
-// }
+const epsilonToDecimal = epsilon => {
+  const epsilonToInt = epsilon.join('');
+  return parseInt(epsilonToInt, 2);
+}
+console.log(epsilonToDecimal(epsilon));
 
-// console.log(powerReading(bitIndexReadings[0]));
+const powerReading = (gammaToDecimal, epsilonToDecimal) => {
+  const power = gammaToDecimal(gamma) * epsilonToDecimal(epsilon);
+  return power;
+}
+
+console.log(powerReading(gammaToDecimal, epsilonToDecimal));
