@@ -45,43 +45,38 @@ const theArrayINeedToMeasureGammaFor = [
   ]
 ];
 
+
 console.log(theArrayINeedToMeasureGammaFor);
 
 
-const thisManyOnesPerBit = theArrayINeedToMeasureGammaFor.forEach((theArrayINeedToMeasureGammaFor) => { 
-    let onesArr = [];
+const thisManyOnesPerBit = theArrayINeedToMeasureGammaFor.map((theArrayINeedToMeasureGammaFor) => { 
+    // let onesArr = [];
     const allTheOnes = theArrayINeedToMeasureGammaFor.filter(x => x == 1);
 
-    const onesArrMaker = allTheOnes.map(x => {
-      onesArr.push(1);
-      return onesArr;
-    })
-      
-    const lengthOfOnesArr = onesArrMaker.reduce((sum, x) => {
-      return sum + onesArr.length;
-    })
+  console.log(allTheOnes);
+  return allTheOnes;
 
-  return lengthOfOnesArr;
   })
 
 
 // I need to figure out how to use this ones count -- 
 
 
-const rawPowerReading = theArrayINeedToMeasureGammaFor.map( lengthOfOnesArr => {
+const rawPowerReading = theArrayINeedToMeasureGammaFor.map( allTheOnes => {
   let gamma = [];
   let epsilon = [];
 
-  let gammaReader = theArrayINeedToMeasureGammaFor.map((lengthOfOnesArr) => {
-    lengthOfOnesArr.length > halfReadingLength ? gamma.push('1') : gamma.push('0');
+  let gammaReader = theArrayINeedToMeasureGammaFor.map((allTheOnes) => {
+    allTheOnes.length > halfReadingLength ? gamma.push('1') : gamma.push('0');
     return gamma;
   })
 
-  let epsilonReader = theArrayINeedToMeasureGammaFor.map((lengthOfOnesArr) => { 
-    lengthOfOnesArr.length < halfReadingLength ? epsilon.push('1') : epsilon.push('0');
+  let epsilonReader = theArrayINeedToMeasureGammaFor.map((allTheOnes) => { 
+    allTheOnes.length < halfReadingLength ? epsilon.push('1') : epsilon.push('0');
     return epsilon;
   })
 
+  console.log(gamma);
   console.log(epsilon);
 })
 
