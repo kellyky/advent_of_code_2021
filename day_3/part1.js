@@ -8,7 +8,13 @@ const readings = fs
 // Day 3: https://adventofcode.com/2021/day/3
 
 
-const powerSlice = (readings, index) => {
+const sum = (x, y) => x + y;
+const length = (readings) => readings.length;
+const arraySum = array => array.reduce(sum);
+const halfReadingLength = readings.length / 2;
+
+
+const readingBitSlicer = (readings, index) => {
   let column = [];
   for (let i in readings) {
     const entry = readings[i];
@@ -17,13 +23,14 @@ const powerSlice = (readings, index) => {
   return column;
 }
 
-const eachPowerSlice = [powerSlice(readings, 0), powerSlice(readings, 1), powerSlice(readings, 2), powerSlice(readings, 3), powerSlice(readings, 4)]
-// console.log(eachPowerSlice);
+
+const bitIndexReadings = [readingBitSlicer(readings, 0), readingBitSlicer(readings, 1), readingBitSlicer(readings, 2), readingBitSlicer(readings, 3), readingBitSlicer(readings, 4)]
+console.log(bitIndexReadings);
 
 
-const readingTheOnes = eachPowerSlice.forEach((eachPowerSlice => { 
+const thisManyOnesPerBit = bitIndexReadings.forEach((bitIndexReadings => { 
     let onesArr = [];
-    const allTheOnes = eachPowerSlice.filter(x => x == 1);
+    const allTheOnes = bitIndexReadings.filter(x => x == 1);
 
     const onesArrMaker = allTheOnes.map(x => {
       onesArr.push(1);
@@ -34,39 +41,35 @@ const readingTheOnes = eachPowerSlice.forEach((eachPowerSlice => {
       return sum + onesArr.length;
     })
   return onesArr;
-  })
-)
+  }))
 
-const readingTheZeros = eachPowerSlice.forEach((eachPowerSlice => {
-    let zeroArr = [];
 
-    const allTheZeros = eachPowerSlice.filter(y => y == 0);
-
-    const zerosArrMaker = allTheZeros.map(y => {
-      zeroArr.push(0);
-      return zeroArr;
-    })
-
-    const lengthOfZerosArr = zerosArrMaker.reduce((sum, y) => {
-      return sum + zeroArr.length;
-    })
-  return zeroArr;
-  })
-)
-      
-const powerReading = eachPowerSlice.map((eachPowerSlice, onesArr, zeroArr) => {
+const rawPowerReading = bitIndexReadings.map( onesArr => {
   let gamma = [];
   let epsilon = [];
 
-    if (onesArr.length > zeroArr.length) {
-      gamma.push(1);
-      epsilon.push(0);
-    } else {
-      gamma.push(0);
-      epsilon.push(1);
-    }
+  let gammaReader = bitIndexReadings.map((onesArr) => {
+    onesArr.length > halfReadingLength ? gamma.push('1') : gamma.push('0');
+    return gamma;
+  })
 
-    console.log(gamma);
-    console.log(epsilon);
+  let epsilonReader = bitIndexReadings.map((onesArr) => { 
+    onesArr.length < halfReadingLength ? epsilon.push('1') : epsilon.push('0');
+    return epsilon;
+  })
+
+  console.log(gamma);
+  console.log(epsilon);
+  
 })
 
+// const rawPowerReading = bitIndexReadings.map( onesArr => {
+// const powerReading = (bitIndexReadings, onesArr) => {
+//   let gamma = [];
+//   let epsilon = [];
+
+
+
+// }
+
+// console.log(powerReading(bitIndexReadings[0]));
