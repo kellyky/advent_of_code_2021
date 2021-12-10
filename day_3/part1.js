@@ -22,15 +22,8 @@ const bitColumnSlicer = (readings, index) => {
   return column;
 }
 
-// const bitIndexReadings = bitColumnSlicer.map( index => {
-//   return index;
-  
-// })
 
 const bitIndexReadings = [bitColumnSlicer(readings, 0), bitColumnSlicer(readings, 1), bitColumnSlicer(readings, 2), bitColumnSlicer(readings, 3), bitColumnSlicer(readings, 4),bitColumnSlicer(readings, 5),bitColumnSlicer(readings, 6),bitColumnSlicer(readings, 7),bitColumnSlicer(readings, 8),bitColumnSlicer(readings, 9),bitColumnSlicer(readings, 10),bitColumnSlicer(readings, 11)]
-
-// const bitIndexReadings = [ bitColumnSlicer(readings, 0), bitColumnSlicer(readings, 1), bitColumnSlicer(readings, 2), bitColumnSlicer(readings, 3), bitColumnSlicer(readings, 4) bitColumnSlicer(readings, 5), bitColumnSlicer(readings, 6), bitColumnSlicer(readings, 7), bitColumnSlicer(readings, 8), bitColumnSlicer(readings, 9), bitColumnSlicer(readings, 10), bitColumnSlicer(readings, 11), 
-// ]
 
 
 const thisManyOnesPerBit = bitIndexReadings.map((column => { 
@@ -40,25 +33,20 @@ const thisManyOnesPerBit = bitIndexReadings.map((column => {
 const gamma = thisManyOnesPerBit.map( countedOnes => {
   return countedOnes.length > halfReadingLength ? '1' : '0';
 })
-console.log(gamma);
 
 const gammaToDecimal = gamma => {
   const gammaToInt = gamma.join('');
   return parseInt(gammaToInt, 2);
 }
 
-console.log(gammaToDecimal(gamma));
-
 const epsilon = gamma.map( element => {
   return element == '1' ? '0' : '1';
 })
-console.log(epsilon);
 
 const epsilonToDecimal = epsilon => {
   const epsilonToInt = epsilon.join('');
   return parseInt(epsilonToInt, 2);
 }
-console.log(epsilonToDecimal(epsilon));
 
 const powerReading = (gammaToDecimal, epsilonToDecimal) => {
   const power = gammaToDecimal(gamma) * epsilonToDecimal(epsilon);
