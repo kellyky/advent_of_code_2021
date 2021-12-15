@@ -1,70 +1,71 @@
 const fs = require("fs");
 
 const readings = fs
-  .readFileSync("sampleInput.txt", { encoding: "utf-8" })
+  .readFileSync("input.txt", { encoding: "utf-8" })
   .split("\n")
   .filter((x) => x)
 
 // Day 3: https://adventofcode.com/2021/day/3
 
 const sum = (x, y) => x + y;
-const length = (readings) => readings.length;
+const listLength = readings.length;
+const wordLength = readings[0].length;
 const arraySum = array => array.reduce(sum);
 const halfReadingLength = readings.length / 2;
 
-// console.log(readings);
 
-const firstIndex = readings.map( entry => {
-  for (let i in entry) {
-    return entry[i];
+const arrOfSlices = array => {
+  let outerArr = [];
+  for (let i in array) {
+    for (let el of array) {
+      outerArr.push(el[i]);
+    }
   }
+  const flattened = outerArr.flat();
+  let newestArr = [];
+
+  // (x, y) are slice coords
+  for (let x = 0; x < (listLength * wordLength); x += listLength){
+    let y = x + listLength;
+    newestArr.push(flattened.slice(x, y));
+  }
+  return newestArr;
+}
+
+const bitIndexReadings = arrOfSlices(readings);
+
+
+
+const thisManyOnesPerBit = bitIndexReadings.map((column => { 
+  return column.filter(x => x == 1);
+}))
+
+const gamma = thisManyOnesPerBit.map( countedOnes => {
+  return countedOnes.length > halfReadingLength ? '1' : '0';
 })
 
-console.log(firstIndex);
+const gammaToDecimal = gamma => {
+  const gammaToInt = gamma.join('');
+  return parseInt(gammaToInt, 2);
+}
 
-
-// I think I need to add code back in to evalutate qty of 1s
-
-
-
-// Filters out elements starting with 1
-const oneStartingElements = readings.filter( el => {
-  return el[0] == 1;
-})
-console.log("oneStartingElements");
-console.log(oneStartingElements);
-
-const thisManyOneStartingElements = oneStartingElements.count;
-console.log(thisManyOneStartingElements);
-
-// Filters out elements starting with 0
-const zeroStartingElements = readings.filter( el => {
-  return el[0] == 0;
+const epsilon = gamma.map( element => {
+  return element == '1' ? '0' : '1';
 })
 
-console.log("zeroStartingElements");
-console.log(zeroStartingElements);
+const epsilonToDecimal = epsilon => {
+  const epsilonToInt = epsilon.join('');
+  return parseInt(epsilonToInt, 2);
+}
 
-const thisManyZeroStartingElements = zeroStartingElements.length;
-console.log(thisManyZeroStartingElements);
+const powerReading = (gammaToDecimal, epsilonToDecimal) => {
+  const power = gammaToDecimal(gamma) * epsilonToDecimal(epsilon);
+  return power;
+}
 
+console.log(powerReading(gammaToDecimal, epsilonToDecimal));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// The very end is easy :-) 
-// const lifeSupportRating = (oxygenGeneratorRating, carbonDioxideScrubber) => oxygenGeneratorRating * carbonDioxideScrubber;
-// console.log(lifeSupportRating(oxygenGeneratorRating, carbonDioxideScrubber));
-
+// life support rating = oxygen generator rating * CO2 scrubber rating
+// oxigen rating => most common
+// CO2 scrubber => least common
 

@@ -8,23 +8,32 @@ const readings = fs
 // Day 3: https://adventofcode.com/2021/day/3
 
 const sum = (x, y) => x + y;
-const length = (readings) => readings.length;
+const listLength = readings.length;
+const wordLength = readings[0].length;
 const arraySum = array => array.reduce(sum);
 const halfReadingLength = readings.length / 2;
 
+const arrOfSlices = array => {
+  let outerArr = [];
 
-const bitColumnSlicer = (readings, index) => {
-  let column = [];
-  for (let i in readings) {
-    const entry = readings[i];
-    column.push(entry[index]);
+  for (let i in array) {
+    for (let el of array) {
+      outerArr.push(el[i]);
+    }
   }
-  return column;
+  const flattened = outerArr.flat();
+  let newestArr = [];
+
+  for (let x = 0; x < (listLength * wordLength); x += listLength){
+    let y = x + listLength;
+
+    newestArr.push(flattened.slice(x, y));
+  }
+
+  return newestArr;
 }
 
-
-const bitIndexReadings = [bitColumnSlicer(readings, 0), bitColumnSlicer(readings, 1), bitColumnSlicer(readings, 2), bitColumnSlicer(readings, 3), bitColumnSlicer(readings, 4),bitColumnSlicer(readings, 5),bitColumnSlicer(readings, 6),bitColumnSlicer(readings, 7),bitColumnSlicer(readings, 8),bitColumnSlicer(readings, 9),bitColumnSlicer(readings, 10),bitColumnSlicer(readings, 11)]
-
+const bitIndexReadings = arrOfSlices(readings);
 
 const thisManyOnesPerBit = bitIndexReadings.map((column => { 
   return column.filter(x => x == 1);
