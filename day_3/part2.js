@@ -37,7 +37,6 @@ const massiveArrOfOnes = bitIndexReadings.map((column => {
   return column.filter(x => x == 1);
 }))
 
-
 const gamma = massiveArrOfOnes.map( countedOnes => {
   return countedOnes.length > totalReadingsCount/2 ? '1' : '0';
 })
@@ -67,6 +66,10 @@ const powerReading = (gammaToDecimal, epsilonToDecimal) => {
 // oxigen rating => most common
 // CO2 scrubber => least common
 
+let oxygenRating = [];
+let co2Scrubber = [];
+
+// counts qty of 1s in each bit of specified array
 const bitOneCount = arr => {
   return bitIndexReadings.map(el => {
     const ones = el.filter(n => n == 1);
@@ -74,67 +77,52 @@ const bitOneCount = arr => {
   })
 }
 
-const sweetOrange = bitOneCount(readings);
-
-console.log(sweetOrange);
-
-// const whichValGreater = arr => {
-//   let eval = [];
-//   for (let el of arr) {
-//     if (el >= totalReadingsCount / 2) {
-//       eval.push("ones");
-//     } else {
-//       eval.push("zeros");
-//     }
-//   }
-//   return eval
-// }
-
+// runs bitOneCount on readings
+const readingsBitsOneCount = bitOneCount(readings);
+console.log(readingsBitsOneCount);
 
 
 // evaluates whether 
-const beaker = (arr1, arr2) => {
+const beaker = (arr1, arr2)) => {
   let eval = [];
   for (let el of arr1){
     if (el >= totalReadingsCount / 2) {
-      eval.push("yes");
+      readings.filter(x => {
+        if (el[x] == '1') return 
+
+      }
+      eval.push("ones");
+      // code to keep the elements in readings that have 1 in respective position
     } else {
-      eval.push("not this time");
+      eval.push("zeros");
+      // code to keep elements in readings that have 0 in respective position
     }
   }
   return eval;
 }
 
-console.log(beaker(sweetOrange, readings));
+console.log(beaker(readingsBitsOneCount, readings));
 
 
-  
-  
+// const newArr = readings.filter(element => {
+//   if (beaker (readingsBitsOneCount, readings) 
+
+
+// }
 
 
 
+// const placeholderName = arr = {
+//   const 
+//   for (let element in arr){
+//     arr.filter(el => {
 
+//       return el >= totalReadingsCount / 2;
+      
 
+//     })
 
-// const tangerine = sweetOrange.map(el => {
-
-
-//   if (sweetOrange[el] >= (totalReadingsCount / 2)){
-//     console.log("more ones");
-//   } else {
-//     console.log("more zeros");
 //   }
-// })
+// }
 
-
-
-
-
-///u goes through each element of bitIndexReadings
-//const lavender = bitIndexReadings.map( el => {
-//  // if element of bitI.. has more 1s (or equal):
-//  //    filter/keep those elements from readings
-//  //if element of bitI.. has more 0sm 
-//  //    filter/keep those elements from readings
-//})
-
+// console.log(placeholderName(readings));
