@@ -1,7 +1,7 @@
 const fs = require("fs");
 
 const readings = fs
-  .readFileSync("input.txt", { encoding: "utf-8" })
+  .readFileSync("sampleInput.txt", { encoding: "utf-8" })
   .split("\n")
   .filter((x) => x)
 
@@ -11,10 +11,9 @@ const sum = (x, y) => x + y;
 const listLength = readings.length;
 const wordLength = readings[0].length;
 const arraySum = array => array.reduce(sum);
-const halfReadingLength = readings.length / 2;
 
 
-const arrOfSlices = array => {
+const allTheBitSlices = array => {
   let outerArr = [];
   for (let i in array) {
     for (let el of array) {
@@ -32,16 +31,15 @@ const arrOfSlices = array => {
   return newestArr;
 }
 
-const bitIndexReadings = arrOfSlices(readings);
+const bitIndexReadings = allTheBitSlices(readings);
 
-
-
-const thisManyOnesPerBit = bitIndexReadings.map((column => { 
+const massiveArrOfOnes = bitIndexReadings.map((column => { 
   return column.filter(x => x == 1);
 }))
 
-const gamma = thisManyOnesPerBit.map( countedOnes => {
-  return countedOnes.length > halfReadingLength ? '1' : '0';
+
+const gamma = massiveArrOfOnes.map( countedOnes => {
+  return countedOnes.length > listLength/2 ? '1' : '0';
 })
 
 const gammaToDecimal = gamma => {
@@ -68,4 +66,50 @@ console.log(powerReading(gammaToDecimal, epsilonToDecimal));
 // life support rating = oxygen generator rating * CO2 scrubber rating
 // oxigen rating => most common
 // CO2 scrubber => least common
+
+const bergamot = readings.map(reading => {
+  return bitIndexReadings.map(el => {
+    const ones = el.filter(n => n == 1);
+    return ones.length;
+  })
+})
+
+
+// goes through each element of bitIndexReadings
+const lavender = bitIndexReadings.map( el => {
+  
+  
+
+  // if element of bitI.. has more 1s (or equal):
+  //    filter/keep those elements from readings
+  //if element of bitI.. has more 0sm 
+  //    filter/keep those elements from readings
+})
+
+
+
+                          
+console.log("bergamot creates array of ones in bit; returns length of that array");
+console.log(bergamot);
+
+
+
+
+
+
+
+
+
+
+console.log(listLength/2);
+
+const whichBits = bergamot => {
+  if (bergamot >= listLength / 2) return "keep bit with 1s"
+  else return "keep bits with 0s";
+}
+
+const geranium = readings.filter(whichBits);
+
+
+
 
