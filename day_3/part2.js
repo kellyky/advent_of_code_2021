@@ -1,7 +1,7 @@
 const fs = require("fs");
 
 const readings = fs
-  .readFileSync("sampleInput.txt", { encoding: "utf-8" })
+  .readFileSync("input.txt", { encoding: "utf-8" })
   .split("\n")
   .filter((x) => x)
 
@@ -23,8 +23,7 @@ const allTheBitSlices = array => {
   const flattened = outerArr.flat();
   let newestArr = [];
 
-  // (x, y) are slice coords
-  for (let x = 0; x < (listLength * wordLength); x += listLength){
+  for (let x = 0; x < (listLength * wordLength); x += listLength){ // coordinates in slice, wasn't sure what to call them
     let y = x + listLength;
     newestArr.push(flattened.slice(x, y));
   }
@@ -42,74 +41,78 @@ const gamma = massiveArrOfOnes.map( countedOnes => {
   return countedOnes.length > listLength/2 ? '1' : '0';
 })
 
-const gammaToDecimal = gamma => {
-  const gammaToInt = gamma.join('');
-  return parseInt(gammaToInt, 2);
-}
-
 const epsilon = gamma.map( element => {
   return element == '1' ? '0' : '1';
 })
 
-const epsilonToDecimal = epsilon => {
-  const epsilonToInt = epsilon.join('');
-  return parseInt(epsilonToInt, 2);
-}
+const binaryStringToDecimal = binaryString => parseInt((binaryString.join('')), 2);
 
-const powerReading = (gammaToDecimal, epsilonToDecimal) => {
-  const power = gammaToDecimal(gamma) * epsilonToDecimal(epsilon);
-  return power;
-}
+const powerReading = binaryStringToDecimal(gamma) * binaryStringToDecimal(epsilon);
 
-console.log(powerReading(gammaToDecimal, epsilonToDecimal));
+console.log("\nPower Reading:");
+console.log(powerReading);
 
 // life support rating = oxygen generator rating * CO2 scrubber rating
-// oxigen rating => most common
+// oxygen rating => most common
 // CO2 scrubber => least common
 
-const bergamot = readings.map(reading => {
-  return bitIndexReadings.map(el => {
-    const ones = el.filter(n => n == 1);
-    return ones.length;
-  })
-})
+const getCount = lines => {
+  const zeros = Array(listLength).fill(0);
+  const ones = Array(listLength).fill(0);
 
-
-// goes through each element of bitIndexReadings
-const lavender = bitIndexReadings.map( el => {
+  for (const line of lines){
+    const bits = [...line];
+    bits.forEach((bit, index) => {
+      if (bit == "0") {
+        zeros[index]++;
+      } else {
+        ones[index]++;
+      }
+    })
+  }
   
-  
-
-  // if element of bitI.. has more 1s (or equal):
-  //    filter/keep those elements from readings
-  //if element of bitI.. has more 0sm 
-  //    filter/keep those elements from readings
-})
-
-
-
-                          
-console.log("bergamot creates array of ones in bit; returns length of that array");
-console.log(bergamot);
-
-
-
-
-
-
-
-
-
-
-console.log(listLength/2);
-
-const whichBits = bergamot => {
-  if (bergamot >= listLength / 2) return "keep bit with 1s"
-  else return "keep bits with 0s";
+  return { zeros, ones };
 }
 
-const geranium = readings.filter(whichBits);
+function getOxygenRating(lines, index = 0) {
+  const { zeros, ones } = getCount(lines);
+  let mostCommonBit = "1";
+  if (zeros[index] > ones[index]) {
+    mostCommonBit = "0";
+
+  } 
+
+  const filtered = lines.filter((line) => line[index] == mostCommonBit);
+
+  if (filtered.length == 1){
+    return filtered[0]
+  }
+  return getOxygenRating(filtered, index+1);
+}
+
+const O2Rating = getOxygenRating(readings);
 
 
+function getCO2ScrubberRating(lines, index = 0) {
+  const { zeros, ones } = getCount(lines);
+  let leastCommonBit = "0";
+  if (ones[index] < zeros[index]) {
+    leastCommonBit = "1";
+  }
+  const filtered = lines.filter((line) => line[index] == leastCommonBit);
+  if (filtered.length == 1){
+    return filtered[0];
+  }
+  return getCO2ScrubberRating(filtered, index+1);
+}
 
+const CO2Rating = getCO2ScrubberRating(readings);
+
+const lifeSupportRating = (oxy, carbon) => {
+  return parseInt(oxy, 2) * parseInt(carbon, 2);
+}
+
+console.log("\nLife Support Rating:");
+console.log(lifeSupportRating(O2Rating, CO2Rating));
+console.log("\n");
 
