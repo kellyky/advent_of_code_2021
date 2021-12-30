@@ -6,7 +6,7 @@ const readings = fs
   .filter((x) => x)
 
 
-const sum = (x, y) => x + y;
+const sum = (num1, num2) => num1 + num2;
 const listLength = readings.length;
 const wordLength = readings[0].length;
 const arraySum = array => array.reduce(sum);
@@ -15,15 +15,15 @@ const binaryStringToDecimal = binaryString => parseInt((binaryString.join('')), 
 
 const allTheBitSlices = array => {
   let outerArr = [];
-  for (let i in array) {
-    for (let el of array) {
-      outerArr.push(el[i]);
+  for (let index in array) {
+    for (let element of array) {
+      outerArr.push(element[index]);
     }
   }
   const flattened = outerArr.flat();
   let newestArr = [];
 
-  for (let x = 0; x < (listLength * wordLength); x += listLength){ // coordinates in slice, wasn't sure what to call them
+  for (let x = 0; x < (listLength * wordLength); x += listLength){ 
     let y = x + listLength;
     newestArr.push(flattened.slice(x, y));
   }
@@ -70,7 +70,6 @@ function getOxygenRating(lines, index = 0) {
   let mostCommonBit = "1";
   if (zeros[index] > ones[index]) {
     mostCommonBit = "0";
-
   } 
 
   const filtered = lines.filter((line) => line[index] == mostCommonBit);
