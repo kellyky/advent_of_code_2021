@@ -5,12 +5,12 @@ const readings = fs
   .split("\n")
   .filter((x) => x)
 
-// Day 3: https://adventofcode.com/2021/day/3
 
 const sum = (x, y) => x + y;
 const listLength = readings.length;
 const wordLength = readings[0].length;
 const arraySum = array => array.reduce(sum);
+const binaryStringToDecimal = binaryString => parseInt((binaryString.join('')), 2);
 
 
 const allTheBitSlices = array => {
@@ -36,7 +36,6 @@ const massiveArrOfOnes = bitIndexReadings.map((column => {
   return column.filter(x => x == 1);
 }))
 
-
 const gamma = massiveArrOfOnes.map( countedOnes => {
   return countedOnes.length > listLength/2 ? '1' : '0';
 })
@@ -45,16 +44,8 @@ const epsilon = gamma.map( element => {
   return element == '1' ? '0' : '1';
 })
 
-const binaryStringToDecimal = binaryString => parseInt((binaryString.join('')), 2);
-
 const powerReading = binaryStringToDecimal(gamma) * binaryStringToDecimal(epsilon);
-
-console.log("\nPower Reading:");
-console.log(powerReading);
-
-// life support rating = oxygen generator rating * CO2 scrubber rating
-// oxygen rating => most common
-// CO2 scrubber => least common
+console.log("Power Reading: " + powerReading);
 
 const getCount = lines => {
   const zeros = Array(listLength).fill(0);
@@ -92,7 +83,6 @@ function getOxygenRating(lines, index = 0) {
 
 const O2Rating = getOxygenRating(readings);
 
-
 function getCO2ScrubberRating(lines, index = 0) {
   const { zeros, ones } = getCount(lines);
   let leastCommonBit = "0";
@@ -108,11 +98,11 @@ function getCO2ScrubberRating(lines, index = 0) {
 
 const CO2Rating = getCO2ScrubberRating(readings);
 
-const lifeSupportRating = (oxy, carbon) => {
+const getLifeSupportRating = (oxy, carbon) => {
   return parseInt(oxy, 2) * parseInt(carbon, 2);
 }
 
-console.log("\nLife Support Rating:");
-console.log(lifeSupportRating(O2Rating, CO2Rating));
-console.log("\n");
+const lifeSupportRating = getLifeSupportRating(O2Rating, CO2Rating);
+
+console.log("Life Support Rating: " + lifeSupportRating);
 
