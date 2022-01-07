@@ -1,4 +1,4 @@
-// Code I can use to 'import' the daily directions file
+// Code I can use to 'import' the daily setOfDirections file
 
 const fs = require("fs");
 
@@ -10,21 +10,24 @@ const directions = fs
 
 // Day 2, Part 1 https://adventofcode.com/2021/day/2
 
-function diveToLocation (directions) {
+function followTheseDirections (setOfDirections) {
   let depth = 0;
   let horizontal = 0;
 
-  for (let entry in directions) {
-    let steps = directions[entry];
-    let stepArr = steps.split(' ', directions[entry].length);
-    let distance = parseInt(stepArr[1]);
+  for (let eachStep in setOfDirections) {
+    const steps = setOfDirections[eachStep];
+    const arrayifiedStep = steps.split(' ', setOfDirections[eachStep].length);
+    const goThisWay = arrayifiedStep[0];
+    const distance = parseInt(setOfDirections[eachStep].split(' ', setOfDirections[eachStep].length)[1]);
 
-    stepArr[0] == 'forward' ? horizontal += distance
-    : stepArr[0] == 'down' ? depth += distance
+
+    goThisWay == 'forward' ? horizontal += distance
+    : goThisWay == 'down' ? depth += distance
     : depth -= distance;
 
   }
   return depth * horizontal;
 }
 
-console.log(diveToLocation(directions));
+const theDiveEndsHere = followTheseDirections(directions);
+console.log(theDiveEndsHere);
