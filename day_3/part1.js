@@ -5,12 +5,8 @@ const readings = fs
   .split("\n")
   .filter((x) => x)
 
-// Day 3: https://adventofcode.com/2021/day/3
-
-const sum = (x, y) => x + y;
 const listLength = readings.length;
 const wordLength = readings[0].length;
-const arraySum = array => array.reduce(sum);
 const halfReadingLength = readings.length / 2;
 
 function makeArraySlices (array) {
