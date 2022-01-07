@@ -8,7 +8,7 @@ const input = fs
   .filter(x => x)
   .map((x) => parseInt(x));
 
-const getSonarIncreaseCount = (arr) => {
+function getSonarIncreaseCount (arr) {
   let counter = 0;
 
   for (let i = 0; i < arr.length; i++) {
@@ -16,7 +16,6 @@ const getSonarIncreaseCount = (arr) => {
   }
   return counter;
 };
-
 
 const sonarIncreaseCount = getSonarIncreaseCount(input);
 console.log(sonarIncreaseCount);
