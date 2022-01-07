@@ -13,22 +13,16 @@ const input = fs
 // Day1 Part2:
 // Compare sum of 3 nums, with sum of previous 3
 
-const sonarIncreaseCount = (input) => {
-  let counter = 0; 
-
-  for (let i = 0; i < input.length; i++) {
-    let window = 0;
-
-    while (window < 1){
-      let sumA = input[i] + input[i + 1] + input[i + 2];
-      let sumB = input[i + 1] + input[i + 2] + input[i + 3];
-
-      sumB > sumA ? counter++ : counter += 0;
-      window++;
-    }
+function getSonarIncreaseCount (arr) {
+  let counter = 0;
+  for (let i in arr) {
+    let sumA = arr[i] + arr[i + 1] + arr[i + 2];
+    let sumB = arr[i + 1] + arr[i + 2] + arr[i + 3];
+    if (sumB > sumA) counter++;
   }
-  console.log(counter);
+  return counter;
+}
 
-};
+const sonarIncreasecount = getSonarIncreaseCount(input);
+console.log(sonarIncreasecount);
 
-console.log(sonarIncreaseCount(input));

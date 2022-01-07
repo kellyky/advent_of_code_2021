@@ -5,17 +5,18 @@ const fs = require("fs");
 const input = fs
   .readFileSync("input.txt", { encoding: "utf-8" })
   .split("\n")
-  .filter((x) => Boolean(x))
+  .filter(x => x)
   .map((x) => parseInt(x));
 
-const sonarIncreaseCount = (input) => {
+const getSonarIncreaseCount = (arr) => {
   let counter = 0;
 
-  for (let i = 0; i < input.length; i++) {
-    input[i] < input[i + 1] ? counter ++ : counter += 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] < arr[i + 1]) counter++;
   }
-  
   return counter;
 };
 
-console.log(sonarIncreaseCount(input));
+
+const sonarIncreaseCount = getSonarIncreaseCount(input);
+console.log(sonarIncreaseCount);
