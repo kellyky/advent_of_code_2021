@@ -13,9 +13,8 @@ const wordLength = readings[0].length;
 const arraySum = array => array.reduce(sum);
 const halfReadingLength = readings.length / 2;
 
-const arrOfSlices = array => {
+function makeArraySlices (array) {
   let outerArr = [];
-
   for (let i in array) {
     for (let el of array) {
       outerArr.push(el[i]);
@@ -29,13 +28,12 @@ const arrOfSlices = array => {
 
     newestArr.push(flattened.slice(x, y));
   }
-
   return newestArr;
 }
 
-const bitIndexReadings = arrOfSlices(readings);
+const bits = makeArraySlices(readings);
 
-const thisManyOnesPerBit = bitIndexReadings.map((column => { 
+const thisManyOnesPerBit = bits.map((column => { 
   return column.filter(x => x == 1);
 }))
 
@@ -43,23 +41,12 @@ const gamma = thisManyOnesPerBit.map( countedOnes => {
   return countedOnes.length > halfReadingLength ? '1' : '0';
 })
 
-const gammaToDecimal = gamma => {
-  const gammaToInt = gamma.join('');
-  return parseInt(gammaToInt, 2);
-}
-
 const epsilon = gamma.map( element => {
   return element == '1' ? '0' : '1';
 })
 
-const epsilonToDecimal = epsilon => {
-  const epsilonToInt = epsilon.join('');
-  return parseInt(epsilonToInt, 2);
-}
+const interpretReading = el => parseInt(el.join(''), 2);
 
-const powerReading = (gammaToDecimal, epsilonToDecimal) => {
-  const power = gammaToDecimal(gamma) * epsilonToDecimal(epsilon);
-  return power;
-}
+const powerCalculator = (gam, eps) => interpretReading(gam) * interpretReading(eps);
 
-console.log(powerReading(gammaToDecimal, epsilonToDecimal));
+console.log(powerCalculator(gamma, epsilon))
