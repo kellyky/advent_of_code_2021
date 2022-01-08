@@ -7,12 +7,11 @@ const readings = fs
 
 const listLength = readings.length;
 const wordLength = readings[0].length;
-const halfReadingLength = readings.length / 2;
 
-function makeArraySlices (array) {
+function makeArraySlices (allTheReadings) {
   let outerArr = [];
-  for (let i in array) {
-    for (let el of array) {
+  for (let i in allTheReadings) {
+    for (let el of allTheReadings) {
       outerArr.push(el[i]);
     }
   }
@@ -29,12 +28,10 @@ function makeArraySlices (array) {
 
 const bits = makeArraySlices(readings);
 
-const thisManyOnesPerBit = bits.map((column => { 
-  return column.filter(x => x == 1);
-}))
+const onesInBit = bits.map((column =>  column.filter(x => x == 1)));
 
-const gamma = thisManyOnesPerBit.map( countedOnes => {
-  return countedOnes.length > halfReadingLength ? '1' : '0';
+const gamma = onesInBit.map( bitOnes => {
+  return bitOnes.length > readings.length / 2 ? '1' : '0';
 })
 
 const epsilon = gamma.map( element => {
@@ -42,7 +39,6 @@ const epsilon = gamma.map( element => {
 })
 
 const interpretReading = el => parseInt(el.join(''), 2);
+const powerReading = interpretReading(gamma) * interpretReading(epsilon);
 
-const powerCalculator = (gam, eps) => interpretReading(gam) * interpretReading(eps);
-
-console.log(powerCalculator(gamma, epsilon))
+console.log(powerReading)
