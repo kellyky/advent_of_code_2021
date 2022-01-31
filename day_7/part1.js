@@ -1,40 +1,67 @@
-// Code I can use to 'import' the daily input file
-
 const fs = require("fs");
 
-// const input = fs
-//   .readFileSync("input.txt", { encoding: "utf-8" })
-//   .split("\n")
-//   .filter((x) => x)
-//   .map((x) => parseInt(x));
 
-const input = [16,1,2,0,4,2,7,1,2,14];
+const input = fs
+  .readFileSync("input.txt", { encoding: "utf-8" })
+  .split(",")
+  .filter((x) => x)
+  .map((x) => parseInt(x));
 
-// for now, set arbitrarily; I need to find a pattern out here to understand this
-let horizontalPos = 2;
-
-// (for now: creating array the length of input to grab difference)
-// I think this won't serve a purpose... temporary...
-let horiArr = Array(input.length).fill(horizontalPos);
-
-// Pringing the things
-console.log("\n");
-console.log(input);
-console.log("\n");
-console.log(horizontalPos);
-console.log(horiArr);
+// Max and Min probably won't be used irl but we'll see. I'm using them to hone in on how to figure out valid horizontal horizontalPositions to consider
+let inputMax = Math.max(...input);
+console.log("Biggest number from input");
+console.log(inputMax);
 console.log("\n");
 
 
-// FUEL; iterates through array, obtains abs value of difference between 
-let fuelCalc = input.map(x => Math.abs(x - horizontalPos));
-console.log(fuelCalc);
+let inputMin = Math.min(...input);
+console.log("Smallest number from input");
+console.log(inputMin);
+console.log("\n");
 
 
-// Things I think I know
-// We'll need a reduce function to grab sum of all the fuel costs 
-// We'll need a way to evaluate which position has the smallest fuel cost
+// Takes the average of values in input
+// I don't think this wll be used but we'll see
+let mean = arr => (arr.reduce((x,y) => x + y)) / arr.length;
+console.log(mean(input));
 
-// Things I don't know
-// Not totally sure I get what the aim is here; I'm not picturing it
-// What are the valid positions? How do I know when to stop trying new numbers? 
+// Median of input. Thinking it'll be median or mode we'll need... 
+let median = arr => {
+  arr.sort((a, b) => a - b);
+
+  if (arr.length % 2 === 0) {
+    return (arr[arr.length / 2 - 1] + arr[arr.length / 2]) / 2;
+  }
+  return arr[(arr.length - 1) / 2];
+}
+
+console.log(median(input));
+
+
+// let horizontalPosition = (inputMax + inputMin) / 2
+let horizontalPosition = median(input);
+let tryingTheseStartingPoints = input;
+
+console.log("Horizontal Position: This is the value we're using to determine fuel cost");
+console.log(horizontalPosition);
+console.log("\n");
+
+// FUEL used; creates array from input and horizontal horizontalPosition
+let fuel = input.map(x => Math.abs(x - horizontalPosition));
+console.log(`Individual fuel cost: ${fuel}\n`);
+
+// Things I still don't know
+// What are the valid horizontalPositions? How do I know when to stop trying new numbers? Possibly within a certain range of the highest & lowest? 
+
+
+
+
+
+
+
+
+
+
+// Total fuel spent; should be the final step for part 1
+let totalFuelSpent = fuel.reduce(( x, y ) => x + y);
+console.log(totalFuelSpent);
