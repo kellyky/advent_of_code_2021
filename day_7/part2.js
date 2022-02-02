@@ -6,38 +6,40 @@
 //   .filter((x) => x)
 //   .map((x) => parseInt(x));
 
-// Sample input
-const input = [16,1,2,0,4,2,7,1,2,14];
-
-const median = arr => {
-  const length = arr.length;
-  arr.sort((a, b) => a - b);
-
-  if (length % 2 === 0) {
-    return (arr[length / 2 - 1] + arr[length / 2]) / 2;
-  }
-  return arr[(length - 1) / 2];
-}
-
-// PART ONE -- Used Median
-const horizontalPosition = median(input);
-const fuelPart1 = input.map(x => Math.abs(x - horizontalPosition));
 
 /* --------------- PART 2 ----------------------------------------------------------------------------
  *
- * I have TWO problems to solve here, I think:
- * (1) Optimal distance
- * (2) Get the sum for fuel 
+ * PROBLEMS to solve here: 
+ *
+ * (1)  Figure out horizontal position - if different. Part 1 used median
+ * (x)  Find difference of distance between input and horizontal position - in Part 1, distance equaled the fuel spent
+ * (x)  Calculate fuel spent (in each step)
+ * (x)  Add up the fuel spent from all setps
+ *
  *      NEW pattern for fuel:
  *      - 1 step: 1 fuel
  *      - 2 step: 2 fuel + 1 step
  *      - 3 step: 3 fuel + 2 step
- *      - n step: n fuel + (n-1) step 
+ *      - n step: n fuel + (n-1) step   */
 
-/* ------------- Let's try Problem 2 first ----------------- */
 
-// Just gest fuel count alone based on steps input - e.g. 2 steps returns 3 fuel (i.e. 2 + 1 fuel)
-function fuelz(step) {
+
+
+// Starting "horizontal position"
+const startHere = [16,1,2,0,4,2,7,1,2,14]; // sample input
+console.log("startHere - the array of starting horizontal positions")
+console.log(startHere);
+
+// Hard coding steps for now
+const endPosition = 2;
+
+// Basing the distance traversed based on startHere and endPosition
+const stepsTaken = startHere.map(s => Math.abs(s - endPosition));
+console.log("\nstepsTaken - the number of steps needed to get to the endPosition");
+console.log(stepsTaken);
+
+// Now that we have an array of the steps taken for each position, we can use each of those steps to determine the fuel required for each step
+const fuelPerInt = step => {
   let fuel = 0;
   while (step > 0) {
     fuel += step;
@@ -45,4 +47,15 @@ function fuelz(step) {
   }
   return fuel;
 }
+
+const arrFuelTotal = stepsTaken.map( el => {
+  return fuelPerInt(el);
+})
+
+console.log("\narrFuelTotal - this array lists the fuel needed to get to the `endPosition` provided");
+console.log(arrFuelTotal);
+
+const totalFuelSpent = arrFuelTotal.reduce(( x, y ) => x + y);
+console.log("\ntotalFuelSpent - sums up the elements in arrFuelTotal");
+console.log(totalFuelSpent);
 
