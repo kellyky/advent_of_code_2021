@@ -1,10 +1,12 @@
-// const fs = require("fs");
+const fs = require("fs");
 
-// const input = fs
-//   .readFileSync("input.txt", { encoding: "utf-8" })
-//   .split(",")
-//   .filter((x) => x)
-//   .map((x) => parseInt(x));
+// Starting "horizontal position"
+// const startHere = [16,1,2,0,4,2,7,1,2,14]; // sample input
+const startHere = fs
+  .readFileSync("input.txt", { encoding: "utf-8" })
+  .split(",")
+  .filter((x) => x)
+  .map((x) => parseInt(x));
 
 
 /* --------------- PART 2 ----------------------------------------------------------------------------
@@ -22,21 +24,17 @@
  *      - 3 step: 3 fuel + 2 step
  *      - n step: n fuel + (n-1) step   */
 
+// const mean = arr => {
+//   let sum = arr.reduce(( x, y ) => x + y);
+//   return sum / arr.length;
+// }
 
-
-
-// Starting "horizontal position"
-const startHere = [16,1,2,0,4,2,7,1,2,14]; // sample input
-console.log("startHere - the array of starting horizontal positions")
-console.log(startHere);
-
-// Hard coding steps for now
-const endPosition = 2;
+// const mean = arr => (arr.reduce(( x, y ) => x + y) / arr.length);
+const endPosition = Math.floor(startHere.reduce((x, y) => x + y) / startHere.length);
+console.log(endPosition);
 
 // Basing the distance traversed based on startHere and endPosition
 const stepsTaken = startHere.map(s => Math.abs(s - endPosition));
-console.log("\nstepsTaken - the number of steps needed to get to the endPosition");
-console.log(stepsTaken);
 
 // Now that we have an array of the steps taken for each position, we can use each of those steps to determine the fuel required for each step
 const fuelPerInt = step => {
@@ -52,8 +50,8 @@ const arrFuelTotal = stepsTaken.map( el => {
   return fuelPerInt(el);
 })
 
-console.log("\narrFuelTotal - this array lists the fuel needed to get to the `endPosition` provided");
-console.log(arrFuelTotal);
+// console.log("\narrFuelTotal - this array lists the fuel needed to get to the `endPosition` provided");
+// console.log(arrFuelTotal);
 
 const totalFuelSpent = arrFuelTotal.reduce(( x, y ) => x + y);
 console.log("\ntotalFuelSpent - sums up the elements in arrFuelTotal");
