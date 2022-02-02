@@ -8,27 +8,22 @@ const startingPlaces = fs
   .map((x) => parseInt(x));
 
 
-const getMeanOfArray = arr => {
-  let sum = arr.reduce(( x, y ) => x + y);
-  return sum / arr.length;
-}
+const mean = startingPlaces.reduce((x, y) => x + y) / startingPlaces.length;
 
-const endPosition = Math.floor(getMeanOfArray(startingPlaces));
+const endPosition = Math.floor(mean);
 
-// eachCrabWalked is the distance between startingPlaces and endPosition
 const eachCrabWalked = startingPlaces.map(x => Math.abs(x - endPosition));
 
-// How much fuel used, in each element of the array
-const fuelPerCrab = step => {
-  let fuel = 0;
-  while (step > 0) {
-    fuel += step;
-    step--;
+const fuelBurnedPerCrab = crabStep => {
+  let fuelGauge = 0;
+  while (crabStep > 0) {
+    fuelGauge += crabStep;
+    crabStep--;
   }
-  return fuel;
+  return fuelGauge;
 }
 
-const arrFuelTotal = eachCrabWalked.map( el => fuelPerCrab(el));
+const arrFuelTotal = eachCrabWalked.map( el => fuelBurnedPerCrab(el));
 
 const totalFuelSpent = arrFuelTotal.reduce(( x, y ) => x + y);
 console.log(totalFuelSpent);
