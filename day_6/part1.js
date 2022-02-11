@@ -1,8 +1,3 @@
-// Code I can use to 'import' the daily input file
-//
-// Sample input 
-let starterPopulation = [3,4,3,1,2];
-
 // const fs = require("fs");
 
 // const starterPopulation = fs
@@ -12,41 +7,24 @@ let starterPopulation = [3,4,3,1,2];
 //   .map((x) => parseInt(x));
 
 
-/* --------- THINGS WE KNOW ------------------
- (x) Each "day" the internalTimerOfEachFish ticks down
- (2) When any individual fish timers hit `0`:
-    (a) a new fish timer is born (i.e. arr.push(8))
-    (x) the fish with timer `0` gets reset to 6
- (x) We get the fish population with arr.length once the days have all run
-*/
-
-// let days = 18;
-
-const hatchlings = arr => arr.filter( x => x === 0);
+// Sample input 
+let starterPopulation = [3,4,3,1,2]; // once test info works, comment this out and uncomment the above
 
 const population = arr => {
-  let day = 0;
-
-  while (day <= 18 ){
-    console.log(day);
-
+  for (let day = 0; day < 18; day++){  // change days to 80 later
+    console.log(`New Day: ${day}`);
     arr = arr.map(x => {
       if (x === 0) {
-        const hatchlingCount = hatchlings(arr).length
-        const newHatchlings = Array(hatchlingCount).fill(8);
-        console.log(newHatchlings);
+        const createThisManyFish = arr.filter(x => x === 0).length;
+        const tempNewFish = Array(createThisManyFish).fill(8);
+        console.log(tempNewFish);
         return x += 6;
       } 
       return x - 1;
     });
-
-    // Need to find out how many '0' value elements & push or concat that many elements valued at 8 onto the array
-
-
-    console.log(arr);
-    day++;
+    console.log(arr); // temp; to see if the values are updating correctly
   }
-  return arr;
+  return arr.length;
 }
 
 console.log(population(starterPopulation));
