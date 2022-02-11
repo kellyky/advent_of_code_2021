@@ -31,6 +31,7 @@ const population = arr => {
     arr = arr.map(x => {
       if (x === 0) {
         console.log("We need new fish & a timer restart!");
+        return x += 6;
       } 
       return x - 1;
     });

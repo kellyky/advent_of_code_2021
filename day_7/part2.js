@@ -23,7 +23,7 @@ const fuelBurnedPerCrab = crabStep => {
   return fuelGauge;
 }
 
-const arrFuelTotal = eachCrabWalked.map( el => fuelBurnedPerCrab(el));
+const arrFuelTotal = eachCrabWalked.map( crabSteps => fuelBurnedPerCrab(crabSteps));
 
 const totalFuelSpent = arrFuelTotal.reduce(( x, y ) => x + y);
 console.log(totalFuelSpent);
