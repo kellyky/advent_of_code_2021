@@ -6,55 +6,31 @@
 //   .filter((x) => x)
 //   .map((x) => parseInt(x));
 
-
-// Sample input 
-let starterPopulation = [3,4,3,1,2]; // once test info works, comment this out and uncomment the above
-
-// const population = arr => {
-//   for (let day = 0; day < 18; day++){  // change days to 80 later
-//     console.log(`New Day: ${day}`);
-//     arr = arr.map(x => {
-//       if (x === 0) {
-//         const createThisManyFish = arr.filter(x => x === 0).length;
-//         const tempNewFish = Array(createThisManyFish).fill(8);
-//         console.log(tempNewFish);
-//         return x += 6;
-//       } 
-//       return x - 1;
-//     });
-//     console.log(arr); // temp; to see if the values are updating correctly
-//   }
-//   return arr.length;
-// }
-
-// let starterPopulation = [3,4,3,1,2];
+let starterPopulation = [3,4,3,1,2]; 
 
 const population = arr => {
-  for (let day = 1; day < 18; day++){
 
-    console.log(`New Day: ${day}`); // temp just to track days
-    arr = arr.map(x => {
+  // looping the days
+  for (let day = 0; day < 80; day++){  
+    const createThisManyFish = arr.filter(x => x === 0).length;
+    // console.log(`New Day starts: ${day}`); // temp just to track days
+
+    // Ticks the counter down each day (or re-sets it to 6 if it's at 0)
+    arr = arr.map(x => {      
       if (x === 0) {
         return x += 6;
-      }
+      } 
       return x - 1;
     });
-
-    const createThisManyFish = arr.filter(x => x === 0).length;
+    
     const tempNewFish = Array(createThisManyFish).fill(8);
-    // console.log(tempNewFish);
-
+  
     arr = arr.concat(tempNewFish);
-    console.log(arr)
+    
+    // console.log(arr)
 
-
-//    console.log(arr.concat(tempNewFish)); // temp; to see if the values are updating correctly
   }
   return arr.length;
 }
 
 console.log(population(starterPopulation));
-
-console.log(population(starterPopulation));
-
-
