@@ -6,7 +6,7 @@ Following along with Advent of Code exercises. https://adventofcode.com/2021.
 * Day 1: [Part 1](https://github.com/kellyky/advent_of_code_2021/blob/main/day_1/sonarCount_pt1.js) | [Part 2](https://github.com/kellyky/advent_of_code_2021/blob/main/day_1/sonarCount_pt2.js)
 * Day 2: [Part 1](https://github.com/kellyky/advent_of_code_2021/blob/main/day02/part1.js) | [Part 2](https://github.com/kellyky/advent_of_code_2021/blob/main/day_2/part2.js)
 * Day 3: [Part 1](https://github.com/kellyky/advent_of_code_2021/blob/main/day_3/part1.js) | [Part 2](https://github.com/kellyky/advent_of_code_2021/blob/main/day_3/part2.js)
-* [Day 6](https://github.com/kellyky/advent_of_code_2021/tree/main/day_6): In progress/just started
+* Day 6: [Part 1](https://github.com/kellyky/advent_of_code_2021/blob/main/day_6/part1.js)
 * Day 7: [Part 1](https://github.com/kellyky/advent_of_code_2021/blob/main/day_7/part1.js) | [Part 2](https://github.com/kellyky/advent_of_code_2021/blob/main/day_7/part2.js)
 
 I'll probably stick to Javascript for the exercises. I may or may not continue to update the readme with day/day-part links. We'll see!
