@@ -1,12 +1,12 @@
-// const fs = require("fs");
+const fs = require("fs");
 
-// const starterPopulation = fs
-//   .readFileSync("input.txt", { encoding: "utf-8" })
-//   .split(",")
-//   .filter((x) => x)
-//   .map((x) => parseInt(x));
+const starterPopulation = fs
+  .readFileSync("input.txt", { encoding: "utf-8" })
+  .split(",")
+  .filter((x) => x)
+  .map((x) => parseInt(x));
 
-let starterPopulation = [3,4,3,1,2]; 
+// let starterPopulation = [3,4,3,1,2]; // sample input
 
 const population = arr => {
 
