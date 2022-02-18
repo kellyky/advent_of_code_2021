@@ -1,6 +1,8 @@
-entries = File.read("input.txt").split
+readings = File.read("input.txt").split
 
-# input = [199, 200, 208, 210, 200, 207, 240, 269, 260, 263]
+# readings = [199, 200, 208, 210, 200, 207, 240, 269, 260, 263]   # Sample data
+
+processed_readings = readings.map{ |el| el.to_i }
 
 def get_sum(input)
  sum = 0
@@ -14,6 +16,8 @@ def get_sum(input)
  sum
 end
 
-the_sum = get_sum(entries)
+the_sum = get_sum(processed_readings)
 puts the_sum
+
+
 
