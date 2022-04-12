@@ -1,27 +1,19 @@
 readings = File.read("input.txt").split
 
-# readings = [199, 200, 208, 210, 200, 207, 240, 269, 260, 263]   # Sample data
+# r = [199, 200, 208, 210, 200, 207, 240, 269, 260, 263]   # Sample data
 
 processed_readings = readings.map &:to_i
 
-def moving_sum(readings)
+def sonar_count(r)
   sum = 0
-
-  loop_num = 0
-  while (loop_num < readings.length - 3)
-
-    # puts [readings[loop_num], readings[loop_num + 1], readings[loop_num + 2]].sum
-
-    first_compare = [readings[loop_num], readings[loop_num + 1], readings[loop_num + 2]].sum
-    second_compare = [readings[loop_num + 1], readings[loop_num + 2], readings[loop_num + 3]].sum
-
-    puts "#{first_compare} vs #{second_compare}"
-    if second_compare > first_compare
+  lap = 0
+  while (lap < r.length - 3)
+    if [r[lap], r[lap + 1], r[lap + 2]].sum < [r[lap + 1], r[lap + 2], r[lap + 3]].sum
       sum += 1
     end
-    loop_num += 1
+    lap += 1
   end
   sum
 end
 
-puts moving_sum(processed_readings)
+puts sonar_count(processed_readings)
