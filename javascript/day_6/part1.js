@@ -13,7 +13,7 @@ const population = arr => {
   for (let day = 0; day < 80; day++){  
     const createThisManyFish = arr.filter(x => x === 0).length;
 
-    arr = arr.map(x => {      
+    arr.map(x => {      
       if (x === 0) {
         return x += 6;
       } 
