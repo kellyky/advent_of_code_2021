@@ -1,8 +1,6 @@
-readings = File.read("input.txt").split
+# https://adventofcode.com/2021/day/1
 
-# r = [199, 200, 208, 210, 200, 207, 240, 269, 260, 263]   # Sample data
-
-processed_readings = readings.map &:to_i
+readings = File.read("input.txt").split.map &:to_i
 
 def sonar_count(r)
   sum = 0
@@ -16,4 +14,4 @@ def sonar_count(r)
   sum
 end
 
-puts sonar_count(processed_readings)
+puts sonar_count(readings)
