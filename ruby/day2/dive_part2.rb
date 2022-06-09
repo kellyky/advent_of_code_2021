@@ -1,8 +1,8 @@
 require 'csv'
 
-directions = CSV.parse(File.read("input.txt"), headers: false)
+directions = CSV.parse(File.read("sample_set.txt"), headers: false)
 
-depth, horizontal_position = 0, 0
+aim, depth, horizontal_position = 0, 0, 0
 
 directions.map! { |command| command.join.split(' ') }
 
@@ -11,11 +11,15 @@ directions.each do |row|
 
   case direction 
   when 'up'
-    depth -= distance.to_i
+    # depth -= distance.to_i
+    aim -= distance.to_i
   when 'down'
-    depth += distance.to_i
+    aim += distance.to_i
+    # depth += distance.to_i
   when 'forward'
     horizontal_position += distance.to_i
+    depth += aim * distance.to_i
+    
   end
 end
 
