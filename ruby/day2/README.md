@@ -1,9 +1,9 @@
-Advent of Code: Day 2
+# Advent of Code: Day 2
+
+Description below quoted from [Advent of Code](https://adventofcode.com/2021/day/2). Solutions are my own. 
 - [Part 1](https://github.com/kellyky/advent_of_code_2021/blob/main/ruby/day2/dive_part1.rb)
 - [Part 2](https://github.com/kellyky/advent_of_code_2021/blob/main/ruby/day2/dive_part2.rb)
 
-# Description -- Quoted from [Advent of Code](https://adventofcode.com/2021/day/2)
-Now, you need to figure out how to pilot this thing.
 
 ## Part 1
 It seems like the submarine can take a series of commands like forward 1, down 2, or up 3:
