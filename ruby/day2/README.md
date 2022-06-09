@@ -1,7 +1,8 @@
 Advent of Code: Day 2
-https://adventofcode.com/2021/day/2
+- [Part 1](https://github.com/kellyky/advent_of_code_2021/blob/main/ruby/day2/dive_part1.rb)
+- [Part 2](https://github.com/kellyky/advent_of_code_2021/blob/main/ruby/day2/dive_part2.rb)
 
-# Description
+# Description -- Quoted from [Advent of Code](https://adventofcode.com/2021/day/2)
 Now, you need to figure out how to pilot this thing.
 
 ## Part 1
