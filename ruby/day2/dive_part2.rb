@@ -1,6 +1,6 @@
 require 'csv'
 
-directions = CSV.parse(File.read("sample_set.txt"), headers: false)
+directions = CSV.parse(File.read("input.txt"), headers: false)
 
 aim, depth, horizontal_position = 0, 0, 0
 
