@@ -1,16 +1,11 @@
 require 'csv'
 
-readings = CSV.parse(File.read("sample.txt"), headers: false)
-# sample has 5 bits, input will be 8
+readings = CSV.parse(File.read("input.txt"), headers: false)
 
 flattened_readings = readings.join.chars
 
 bit_count = readings[0].join.chars.count
-
 the_bits = []
-gamma_rate = []
-epsilon_rate = []
-
 (0...bit_count).each do |bit|
   the_bits.push([])
 end
@@ -22,6 +17,10 @@ readings.each.with_index do |reading|
     the_bits[i].push(bit)
   end
 end
+
+
+gamma_rate = []
+epsilon_rate = []
 
 the_bits.map! do |bit|
   bit.map! do |s|
