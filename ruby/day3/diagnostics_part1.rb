@@ -1,9 +1,7 @@
 require 'csv'
 
-# readings = CSV.parse(File.read("input.txt"), headers: false)
-
 def get_readings
-  CSV.parse(File.read("input.txt"), headers: false)
+  CSV.parse(File.read("input.txt"))
 end
 
 def flatten_readings(arr)
@@ -24,34 +22,27 @@ def add_bit_data(readings, the_bits)
   end
 end
 
-gamma_rate = []
-epsilon_rate = []
+def get_gamma(arr, readings)
+  arr.map! do |bit|
+    bit.map! { |str| str.to_i }
+   bit.sum > readings.count / 2 ? '1' : '0'   
+  end
+end
+
+def get_epsilon(gamma_rate)
+  gamma_rate.map { |b| b == '1' ? '0' : '1' }
+end
+
+def power_consumption(gamma, epsilon)
+  gamma.join.to_i(2) * epsilon.join.to_i(2)
+end
 
 readings = get_readings
 flattened_readings = flatten_readings(readings)
 bit_count = get_bit_count(readings)
 the_bits = make_bit_skeleton(bit_count)
 add_bit_data(readings, the_bits)
-gamma_rate = []
-epsilon_rate = []
-
-
-the_bits.map! do |bit|
-  bit.map! do |s|
-    s.to_i
-  end
-  if bit.sum > readings.count / 2  
-    gamma_rate.push('1') 
-    epsilon_rate.push('0')
-  else
-    gamma_rate.push('0')
-    epsilon_rate.push('1')
-  end
-end
-
-
-def power_consumption(gamma, epsilon)
-  gamma.join.to_i(2) * epsilon.join.to_i(2)
-end
+gamma_rate = get_gamma(the_bits, readings)
+epsilon_rate = get_epsilon(gamma_rate)
 
 puts power_consumption(gamma_rate, epsilon_rate)
