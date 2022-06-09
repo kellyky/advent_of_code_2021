@@ -8,20 +8,18 @@ def flatten_readings(arr)
   arr.join.chars 
 end
 
-def get_bit_count(arr)
-  arr[0].join.chars.count  
+def build_empty_bit_container(arr)
+  bit_count = arr[0].join.chars.count  
+  (0...bit_count).to_a.map { |bit| [] }
 end
 
-def make_bit_skeleton(num)
-  (0...num).to_a.map { |bit| [] }
-end
-
-def add_bit_data(readings, the_bits)
+def fill_bit_container(readings, bit_data)
   readings.each do |reading|
-    reading.join.chars.each.with_index { |bit, i| the_bits[i].push(bit) }
+    reading.join.chars.each.with_index { |bit, i| bit_data[i].push(bit) }
   end
 end
 
+# getting gamma, epsilon, power consumption
 def get_gamma(arr, readings)
   arr.map! do |bit|
     bit.map! { |str| str.to_i }
@@ -33,16 +31,15 @@ def get_epsilon(gamma_rate)
   gamma_rate.map { |b| b == '1' ? '0' : '1' }
 end
 
-def power_consumption(gamma, epsilon)
+def calculate_power_consumption(gamma, epsilon)
   gamma.join.to_i(2) * epsilon.join.to_i(2)
 end
 
 readings = get_readings
 flattened_readings = flatten_readings(readings)
-bit_count = get_bit_count(readings)
-the_bits = make_bit_skeleton(bit_count)
-add_bit_data(readings, the_bits)
-gamma_rate = get_gamma(the_bits, readings)
+bit_data = build_empty_bit_container(readings)
+fill_bit_container(readings, bit_data)
+gamma_rate = get_gamma(bit_data, readings)
 epsilon_rate = get_epsilon(gamma_rate)
 
-puts power_consumption(gamma_rate, epsilon_rate)
+puts calculate_power_consumption(gamma_rate, epsilon_rate)
