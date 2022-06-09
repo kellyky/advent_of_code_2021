@@ -1,26 +1,40 @@
 require 'csv'
 
-readings = CSV.parse(File.read("input.txt"), headers: false)
+# readings = CSV.parse(File.read("input.txt"), headers: false)
 
-flattened_readings = readings.join.chars
-
-bit_count = readings[0].join.chars.count
-the_bits = []
-(0...bit_count).each do |bit|
-  the_bits.push([])
+def get_readings
+  CSV.parse(File.read("input.txt"), headers: false)
 end
 
-# make array of bits
-readings.each.with_index do |reading|
-  r_bits = reading.join.chars
-  r_bits.each.with_index do |bit, i|
-    the_bits[i].push(bit)
+def flatten_readings(arr)
+  arr.join.chars 
+end
+
+def get_bit_count(arr)
+  arr[0].join.chars.count  
+end
+
+def make_bit_skeleton(num)
+  (0...num).to_a.map { |bit| [] }
+end
+
+def add_bit_data(readings, the_bits)
+  readings.each do |reading|
+    reading.join.chars.each.with_index { |bit, i| the_bits[i].push(bit) }
   end
 end
 
-
 gamma_rate = []
 epsilon_rate = []
+
+readings = get_readings
+flattened_readings = flatten_readings(readings)
+bit_count = get_bit_count(readings)
+the_bits = make_bit_skeleton(bit_count)
+add_bit_data(readings, the_bits)
+gamma_rate = []
+epsilon_rate = []
+
 
 the_bits.map! do |bit|
   bit.map! do |s|
@@ -34,6 +48,7 @@ the_bits.map! do |bit|
     epsilon_rate.push('1')
   end
 end
+
 
 def power_consumption(gamma, epsilon)
   gamma.join.to_i(2) * epsilon.join.to_i(2)
